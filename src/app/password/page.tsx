@@ -1,6 +1,6 @@
 import {Card, CardHeader, CardBody, CardFooter} from "@nextui-org/card";
 //import { LockClosedIcon } from '@heroicons/react/solid';
-export default function authForm(){
+export default function PasswordForm(){
 
     return (
         <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -11,7 +11,7 @@ export default function authForm(){
                         src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
                         alt="Workflow"
                     />
-                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Authentification</h2>
+                    <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Récupérer votre mot de passe</h2>
                     <p className="mt-2 text-center text-sm text-gray-600">
                         Ou{' '}
                         <a href="src/app#" className="font-medium text-indigo-600 hover:text-indigo-500">
@@ -40,24 +40,7 @@ export default function authForm(){
                                 placeholder="Email address"
                             />
                         </div>
-                        <div>
-                            <label htmlFor="password" className="sr-only">
-                                Password
-                            </label>
-                            <input
-                                id="password"
-                                name="password"
-                                type="password"
-                                autoComplete="current-password"
-                                required
-                                className="appearance-none rounded-none relative block
-                  w-full px-3 py-2 border border-gray-300
-                  placeholder-gray-500 text-gray-900 rounded-b-md
-                  focus:outline-none focus:ring-indigo-500
-                  focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                placeholder="Password"
-                            />
-                        </div>
+
                     </div>
 
                     <div className="flex items-center justify-between">
@@ -66,8 +49,8 @@ export default function authForm(){
                         </div>
 
                         <div className="text-sm">
-                            <a href="/password" className="font-medium text-indigo-600 hover:text-indigo-500">
-                                Mot de passe oublié
+                            <a href="/" className="font-medium text-indigo-600 hover:text-indigo-500">
+                                Se connecter?
                             </a>
                         </div>
                     </div>
@@ -81,15 +64,18 @@ export default function authForm(){
                 focus:outline-none focus:ring-2 focus:ring-offset-2
                 focus:ring-indigo-500">
                 <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-                  </span>Se connecter</button>
+                  </span>Envoyer</button>
                     </div>
                 </form>
-
-                <div className="flex items-center"><a href="/logged" className="font-medium text-indigo-600 hover:text-indigo-500">Home</a></div>
-
             </div>
 
+
+
+
+
         </div>
+
+
 
     );
 
