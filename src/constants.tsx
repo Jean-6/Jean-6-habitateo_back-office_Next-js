@@ -9,34 +9,53 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     icon: <Icon icon="lucide:home" width="24" height="24" />,
   },
   {
-    title: 'Projects',
-    path: '/projects',
-    icon: <Icon icon="lucide:folder" width="24" height="24" />,
+    title: 'Utilisateurs',
+    path: '/app/logged/customers/',
+    icon: <Icon icon="lucide:users" width="24" height="24" />,
     submenu: true,
-    subMenuItems: [
-      { title: 'All', path: '/projects' },
-      { title: 'Web Design', path: '/projects/web-design' },
-      { title: 'Graphic Design', path: '/projects/graphic-design' },
-    ],
+    subMenuItems:[
+      {title:"Liste", path:"/customers/"}
+    ]
   },
   {
-    title: 'Messages',
-    path: '/messages',
-    icon: <Icon icon="lucide:mail" width="24" height="24" />,
-  },
-  {
-    title: 'Settings',
-    path: '/settings',
-    icon: <Icon icon="lucide:settings" width="24" height="24" />,
+    title:"Documents",
+    path:"/supporting",
+    icon: <Icon icon="lucide:file-check" width="24" height="24" />,
     submenu: true,
-    subMenuItems: [
-      { title: 'Account', path: '/settings/account' },
-      { title: 'Privacy', path: '/settings/privacy' },
-    ],
+    subMenuItems:[
+      {title:"Dépôt",path:"/supporting/deposit"},
+      {title:"Consulter", path:"/supporting/privacy"}
+    ]
   },
   {
-    title: 'Help',
-    path: '/help',
-    icon: <Icon icon="lucide:help-circle" width="24" height="24" />,
+    title:"Statistiques",
+    path:"/statistical",
+    icon: <Icon icon="lucide:bar-chart-4" width="24" height="24" />,
+    submenu: true,
+    subMenuItems:[
+      {title:"Favoris",path:"/statistical/favoris"},
+    ]
+  },
+  {
+    title:"Annonces",
+    path:"/ad",
+    icon: <Icon icon="lucide:credit-card" width="24" height="24" />,
+    submenu: true,
+    subMenuItems:[
+      {title:"Liste", path:"/ad"},
+      {title:"Nouveau",path:"/ad/new"},
+      {title:"Visite", path:"/ad/visit"},
+      {title:"Alertes", path:"/ad/alerts"},
+
+    ]
+  },
+  {
+    title:"Profil",
+    path:"/profil",
+    icon: <Icon icon="lucide:circle-user" width="24" height="24" />,
+    submenu: true,
+    subMenuItems:[
+      {title:"Moi",path:"/profil/me"},
+    ]
   },
 ];
