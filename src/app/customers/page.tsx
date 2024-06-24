@@ -1,7 +1,6 @@
 'use client';
 import React from "react";
 
-
 export default function CustomerListPage () {
     return(<div>
         <SearchForm_/>
@@ -9,7 +8,6 @@ export default function CustomerListPage () {
         <UserList/>
     </div>)
 };
-
 
 const SearchForm = () =>{
     return (
@@ -223,7 +221,6 @@ const ID = () => {
     const setID = (ID: string) => {
 
     }
-
     return (<div>
         <div className="sm:col-span-2 sm:col-start-1">
             <label htmlFor="ID" className="block text-sm font-medium leading-6 text-gray-900">ID</label>
