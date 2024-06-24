@@ -23,8 +23,8 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
     icon: <Icon icon="lucide:file-check" width="24" height="24" />,
     submenu: true,
     subMenuItems:[
-      {title:"Dépôt",path:"/supporting/deposit"},
-      {title:"Consulter", path:"/supporting/privacy"}
+      {title:"Dépôt",path:"/supporting"},
+      {title:"Consulter", path:"/supporting/visualization"}
     ]
   },
   {
