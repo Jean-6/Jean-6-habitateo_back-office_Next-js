@@ -4,13 +4,13 @@ import { SideNavItem } from './types';
 
 export const SIDENAV_ITEMS: SideNavItem[] = [
   {
-    title: 'Home',
-    path: '/',
+    title: 'Dashboard',
+    path: '/dashboard',
     icon: <Icon icon="lucide:home" width="24" height="24" />,
   },
   {
     title: 'Utilisateurs',
-    path: '/app/logged/customers/',
+    path: '/customers/',
     icon: <Icon icon="lucide:users" width="24" height="24" />,
     submenu: true,
     subMenuItems:[
@@ -27,35 +27,26 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
       {title:"Consulter", path:"/supporting/visualization"}
     ]
   },
-  {
-    title:"Statistiques",
-    path:"/statistical",
-    icon: <Icon icon="lucide:bar-chart-4" width="24" height="24" />,
-    submenu: true,
-    subMenuItems:[
-      {title:"Favoris",path:"/statistical/favoris"},
-    ]
-  },
+
   {
     title:"Annonces",
-    path:"/ad",
+    path:"/ad/",
     icon: <Icon icon="lucide:credit-card" width="24" height="24" />,
     submenu: true,
     subMenuItems:[
-      {title:"Liste", path:"/ad"},
-      {title:"Nouveau",path:"/ad/new"},
+      {title:"Liste", path:"/ad/"},
+      /*{title:"Nouveau",path:"/ad/list"},
       {title:"Visite", path:"/ad/visit"},
-      {title:"Alertes", path:"/ad/alerts"},
-
+      {title:"Alertes", path:"/ad/alerts"},*/
     ]
   },
   {
-    title:"Profil",
-    path:"/profil",
+    title:"Profile",
+    path:"/profile/",
     icon: <Icon icon="lucide:circle-user" width="24" height="24" />,
     submenu: true,
     subMenuItems:[
-      {title:"Moi",path:"/profil/me"},
+      {title:"Me",path:"/profile/"},
     ]
   },
 ];
