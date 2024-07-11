@@ -3,9 +3,9 @@ import React, {} from "react";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {z} from "zod";
-import {SchemaRegistrationChecking} from "@/lib/schema/schema-email-checking";
+import {SchemaCodeAfterRegistration} from "@/lib/schema/schema-code-after-registration";
 
-type Inputs = z.infer<typeof SchemaRegistrationChecking>
+type Inputs = z.infer<typeof SchemaCodeAfterRegistration>
 
 
 
@@ -17,7 +17,7 @@ const VerifyUserEmailHook = () =>{
         reset,
         formState: { errors }
     } = useForm<Inputs>({
-        resolver: zodResolver(SchemaRegistrationChecking)
+        resolver: zodResolver(SchemaCodeAfterRegistration)
     })
     const verifyEmailByCodeForm: SubmitHandler<Inputs> = data => {
         console.log(data)
