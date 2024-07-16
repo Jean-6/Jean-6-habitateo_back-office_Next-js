@@ -8,8 +8,9 @@ import {zodResolver} from "@hookform/resolvers/zod";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {z} from "zod";
 
-import PhoneInput from "react-phone-input-2";
 import 'react-phone-number-input/style.css'
+import {router} from "next/client";
+import axios from "axios";
 
 type Inputs = z.infer<typeof SchemaRegistration>
 
@@ -39,9 +40,41 @@ const RegistrationForm = () => {
         resolver: zodResolver(SchemaRegistration)
     })
 
-    const registrationForm: SubmitHandler<Inputs> = data => {
-    console.log(data)
-    reset()
+    const registrationForm: SubmitHandler<Inputs> = async data => {
+
+        //const session = await getSession()
+        /*console.log(JSON.stringify(data))
+        try{
+            const res = await axios({
+                method: "POST",
+                data: JSON.stringify(data),
+                url: 'https://habitateo-api-dda29971e4d9.herokuapp.com/api/v1/users'
+            }).then(token =>{
+                //localStorage.setItem('token',token.data)
+                console.log("token : "+token)
+
+            })
+        }catch(error){
+
+        }*/
+        axios.post('https://habitateo-api-dda29971e4d9.herokuapp.com/api/v1/users',
+        {lastname:data.lastname,
+            firstname:data.firstname,
+            email:data.email,
+            password:data.password,
+            phoneNumber:data.phoneNumber
+        })
+            .then(response => {
+                console.log(response);
+            })
+            .catch(error => {
+                if (error.response && error.response.status === 400) {
+                    console.log('Bad Request: ', error.message);
+                }
+            });
+        router.push('/')
+        reset()
+
     }
 
     return (
@@ -64,7 +97,7 @@ const RegistrationForm = () => {
                         </p>}
                     </div>
                     {/**/}
-                    <form onSubmit={handleSubmit(registrationForm)} className="mt-8 space-y-6" > {/*onSubmit={handleSubmit(registrationForm)}*/}
+                    <form onSubmit={handleSubmit(registrationForm)} className="mt-8 space-y-6" >
                         <input type="hidden" name="remember" defaultValue="true" />
                         <div className="rounded-md shadow-sm -space-y-px">
 

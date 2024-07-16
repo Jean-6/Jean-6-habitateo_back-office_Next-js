@@ -1,13 +1,18 @@
 "use client"
-
-import React, {FormEvent, useEffect, useState} from "react";
+import React from "react";
 import {z} from "zod";
 import {SchemaLogin} from "@/lib/schema/schema-login";
 import {SubmitHandler, useForm} from "react-hook-form";
 import {zodResolver} from "@hookform/resolvers/zod";
+import axios from "axios";
+import {getSession} from "next-auth/react";
+import {useRouter} from "next/router";
+import {router} from "next/client";
+import VerifyUserEmailModal from "@/app/registration/modal-verify-email/verify-email-modal";
 
 
 type Inputs = z.infer<typeof SchemaLogin>
+
 
 export default function LoginForm () {
 
@@ -15,31 +20,29 @@ export default function LoginForm () {
         register,
         handleSubmit,
         reset,
-        formState: { errors }
+        formState: {errors}
     } = useForm<Inputs>({
         resolver: zodResolver(SchemaLogin)
     })
-    const loginForm: SubmitHandler<Inputs> = data => {
-        console.log(data)
+    const loginForm: SubmitHandler<Inputs> = async( data) => {
+        try{
+            const res = await axios({
+                method: "POST",
+                data:{
+                    email:data.email,
+                    password:data.password,
+                },
+                url: 'https://habitateo-api-dda29971e4d9.herokuapp.com/api/v1/auth/login'
+            }).then(token =>{
+                localStorage.setItem("token",token.data)
+                console.log("token : "+token.data)
+                router.push('/dashboard')
+            })
+        }catch(error){
+
+        }
         reset()
     }
-    /*async function handleSubmit(event: FormEvent<HTMLFormElement>){
-        event.preventDefault()
-        const formData = new FormData(event.currentTarget)
-        const email = formData.get('email')
-        const password = formData.get('password')
-        const response = await fetch('https://habitateo-api-dda29971e4d9.herokuapp.com/api/v1/users',{
-            method: 'POST',
-            headers: {'Content-Type':'application/json'},
-            body: JSON.stringify({email,password})
-        })
-        if(response.ok){
-            router.push('/profile')
-        }else{
-            // Handle errors
-        }
-    }*/
-
     return (
         <main>
             <div  className="space-y-3">
@@ -92,15 +95,19 @@ export default function LoginForm () {
                                         Mot de passe oublié
                                     </a>
                                 </div>
+
                             </div>
 
                             <div>
                                 <button type="submit" className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2focus:ring-indigo-500"><span className="absolute left-0 inset-y-0 flex items-center pl-3"> </span>Connexion</button>
                             </div>
                         </form>
+                        <a href={"/dashboard/"}>Home</a>
 
                     </div>
+
                 </div>
+
             </div>
 
         </main>);
