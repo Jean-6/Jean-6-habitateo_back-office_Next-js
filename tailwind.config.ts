@@ -17,6 +17,8 @@ const config: Config = {
       },
     },
   },
-  plugins: [nextui()],
+  plugins: [
+      /*require('flowbite/plugin'),*/
+      nextui()],
 };
 export default config;
