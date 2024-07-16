@@ -2,8 +2,11 @@
 import React, {useEffect, useState} from "react";
 import Link from "next/link";
 import axios from "axios";
-import {SubmitHandler} from "react-hook-form";
-import {Inputs} from "preact/compat";
+import {SubmitHandler, useForm} from "react-hook-form";
+import {SchemaAdSearchFormCriteriaMin} from "@/lib/schema/schema-ad-search-form-criteria-min";
+import {zodResolver} from "@hookform/resolvers/zod";
+import {z} from "zod";
+
 
 interface Ads{
     totalPages: number,
@@ -35,17 +38,19 @@ interface Ads{
 }
 
 
+type Inputs = z.infer<typeof SchemaAdSearchFormCriteriaMin>
 
 
-const SearchForm =   () => {
-    /*const {
+
+const AdSearchForm =   () => {
+    const {
         register,
         handleSubmit,
         reset,
         formState: {errors}
     } = useForm<Inputs>({
-        resolver: zodResolver(SchemaLogin)
-    })*/
+        resolver: zodResolver(SchemaAdSearchFormCriteriaMin)
+    })
 
 
     const loginForm: SubmitHandler<Inputs> = async( data) => {
@@ -61,9 +66,9 @@ const SearchForm =   () => {
                     <form  className="" > {/*mt-8 space-y-6*/}
                         <div className="flex space-x-4">
                             <div>
-                                <label htmlFor="countries" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type de projet</label>
-                                <select id="countries" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-64 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                                    <option selected>Projet</option>
+                                <label htmlFor="project" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Type de projet</label>
+                                <select id="project" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-64 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                                    <option selected></option>
                                     <option value="rental">Location</option>
                                     <option value="purchase">Achat</option>
                                     <option value="sublet">Sous-location</option>
@@ -73,46 +78,45 @@ const SearchForm =   () => {
                                 </select>
                             </div>
                             <div>
-                                <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Recherche par localité</label>
-                                <input type="text" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-64 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Conakry"/>
+                                <label htmlFor="locality" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Localité</label>
+                                <input type="text" id="locality" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-64 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Conakry" required/>
                             </div>
                         </div>
                         <div className="flex space-x-4 mt-2">
                             <div>
-                                <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Budget Min.</label>
-                                <input type="text" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-36 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
+                                <label htmlFor="budgetMin" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Budget Min.</label>
+                                <input type="text" id="budgetMin" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-36 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                             </div>
 
                             <div>
-                                <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Budget Max.</label>
-                                <input type="text" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-36 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+                                <label htmlFor="budgetMax" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Budget Max.</label>
+                                <input type="text" id="budgetMax" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-36 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
                             </div>
                             <div>
-                                <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre de pieces </label>
-                                <input type="number" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-36 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1" />
+                                <label htmlFor="numberOfPieces" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre de pieces </label>
+                                <input type="number" id="numberOfPieces" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-36 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="1" />
                             </div>
                         </div>
 
                         <div className="flex space-x-4 mt-2">
-
                             <div>
-                                <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Surface habitable Min. </label>
-                                <input type="text" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" />
+                                <label htmlFor="livingAreaMin" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Surface habitable Min. </label>
+                                <input type="text" id="livingAreaMin" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" />
                             </div>
 
                             <div>
-                                <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Surface habitable Max.</label>
-                                <input type="text" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" />
+                                <label htmlFor="livingAreaMax" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Surface habitable Max.</label>
+                                <input type="text" id="livingAreaMax" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" />
                             </div>
 
 
                                 <div>
-                                    <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Surface de terrain Min. </label>
-                                    <input type="text" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" />
+                                    <label htmlFor="landAreaMin" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Surface de terrain Min. </label>
+                                    <input type="text" id="landAreaMin" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" />
                                 </div>
                                 <div>
-                                    <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Surface de terrain Max.</label>
-                                    <input type="text" id="first_name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" />
+                                    <label htmlFor="landAreaMax" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Surface de terrain Max.</label>
+                                    <input type="text" id="landAreaMax" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-48 p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="" />
                                 </div>
 
 
@@ -125,7 +129,7 @@ const SearchForm =   () => {
                                     <label htmlFor="default-checkbox" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Meublé</label>
                             </div>
                             <div className="flex items-center">
-                                <input checked id="checked-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
+                                <input id="checked-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"/>
                                     <label htmlFor="checked-checkbox" className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Non meublé </label>
                             </div>
                         </div>
@@ -168,28 +172,10 @@ export default function AdPage () {
         fetchData();
     },[]);
 
-    /*const [ads, setAds] = useState([]);
-    const [currentPage, setCurrentPage] = useState(1);
-    const [totalPages, setTotalPages] = useState(1);
-    const page = 1;
-    const limit = 10;
-
-    useEffect(() => {
-        //let url = `${process.env["BASE_API "]}/ads?page=${page}&limit=${limit}`;
-        let url = `https://habitateo-api-dda29971e4d9.herokuapp.com/api/v1/ads?page=1&limit=10`;
-        console.log("url : "+url)
-        axios.get(url).then((res) => {
-            const { data, headers } = res;
-            setTotalPages(Number(headers['x-wp-totalpages']));
-            setAds(data.results);
-        });
-    }, [currentPage]);
-    console.log('ads', ads);*/
-
         return (
 
             <section className="p-5">
-                <SearchForm/>
+                <AdSearchForm/>
                 <div className="max-w-4xl mx-auto text-center">
 
                 { data.results.map(function (ad:Ads){
@@ -223,7 +209,6 @@ export default function AdPage () {
                         </div>
                     )
                 })}
-                    <Link href="/modal/">test</Link>
                 </div>
 
             </section>
