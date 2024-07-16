@@ -10,11 +10,11 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
   },
   {
     title: 'Utilisateurs',
-    path: '/customers/',
+    path: '/user/',
     icon: <Icon icon="lucide:users" width="24" height="24" />,
     submenu: true,
     subMenuItems:[
-      {title:"Liste", path:"/customers/"}
+      {title:"Liste", path:"/user"}
     ]
   },
   {
@@ -30,14 +30,14 @@ export const SIDENAV_ITEMS: SideNavItem[] = [
 
   {
     title:"Annonces",
-    path:"/ad/",
+    path:"/ads.tsx/",
     icon: <Icon icon="lucide:credit-card" width="24" height="24" />,
     submenu: true,
     subMenuItems:[
-      {title:"Liste", path:"/ad/"},
-      /*{title:"Nouveau",path:"/ad/list"},
-      {title:"Visite", path:"/ad/visit"},
-      {title:"Alertes", path:"/ad/alerts"},*/
+      {title:"Liste", path:"/ads.tsx/"},
+      /*{title:"Nouveau",path:"/ads.tsx/list"},
+      {title:"Visite", path:"/ads.tsx/visit"},
+      {title:"Alertes", path:"/ads.tsx/alerts"},*/
     ]
   },
   {
